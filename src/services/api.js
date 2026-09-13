@@ -33,56 +33,56 @@ export async function getServices(signal) {
 }
 
 export async function getAbout(signal) {
-    const response = await fetch(`${API_URL}/nosotros.php`, {
-      signal,
-    })
-  
-    if (!response.ok) {
-      throw new Error('No fue posible consultar la información del centro.')
-    }
-  
-    const data = await response.json()
-  
-    if (
-      data === null ||
-      typeof data !== 'object' ||
-      Array.isArray(data) ||
-      typeof data.title !== 'string' ||
-      typeof data.description !== 'string' ||
-      typeof data.detail !== 'string'
-    ) {
-      throw new Error('La información del centro no tiene el formato esperado.')
-    }
-  
-    return data
+  const response = await fetch(`${API_URL}/nosotros.php`, {
+    signal,
+  })
+
+  if (!response.ok) {
+    throw new Error('No fue posible consultar la información del centro.')
   }
 
-  export async function getQuestions(signal) {
-    const response = await fetch(`${API_URL}/preguntas.php`, {
-      signal,
-    })
-  
-    if (!response.ok) {
-      throw new Error('No fue posible consultar las preguntas.')
-    }
-  
-    const data = await response.json()
-  
-    const isValid =
-      Array.isArray(data) &&
-      data.every(
-        (item) =>
-          item !== null &&
-          typeof item === 'object' &&
-          typeof item.id === 'string' &&
-          typeof item.question === 'string' &&
-          typeof item.answer === 'string'
-      ) &&
-      new Set(data.map((item) => item.id)).size === data.length
-  
-    if (!isValid) {
-      throw new Error('Las preguntas no tienen el formato esperado.')
-    }
-  
-    return data
+  const data = await response.json()
+
+  if (
+    data === null ||
+    typeof data !== 'object' ||
+    Array.isArray(data) ||
+    typeof data.title !== 'string' ||
+    typeof data.description !== 'string' ||
+    typeof data.detail !== 'string'
+  ) {
+    throw new Error('La información del centro no tiene el formato esperado.')
   }
+
+  return data
+}
+
+export async function getQuestions(signal) {
+  const response = await fetch(`${API_URL}/preguntas.php`, {
+    signal,
+  })
+
+  if (!response.ok) {
+    throw new Error('No fue posible consultar las preguntas.')
+  }
+
+  const data = await response.json()
+
+  const isValid =
+    Array.isArray(data) &&
+    data.every(
+      (item) =>
+        item !== null &&
+        typeof item === 'object' &&
+        typeof item.id === 'string' &&
+        typeof item.question === 'string' &&
+        typeof item.answer === 'string'
+    ) &&
+    new Set(data.map((item) => item.id)).size === data.length
+
+  if (!isValid) {
+    throw new Error('Las preguntas no tienen el formato esperado.')
+  }
+
+  return data
+}

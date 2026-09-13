@@ -155,10 +155,10 @@ function ContactForm({ services, selectedService, onServiceChange }) {
             </label>
             <input
               id="contact-website"
-              name="website"
+              name="company_url"
               type="text"
               tabIndex={-1}
-              autoComplete="off"
+              autoComplete="new-password"
               value={website}
               onChange={(event) => setWebsite(event.target.value)}
             />
