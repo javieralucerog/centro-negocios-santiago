@@ -1,0 +1,3 @@
+CGIPassAuth On
+CGIPassAuth On
+SetEnvIfNoCase Authorization "^(.+)$" HTTP_AUTHORIZATION=$1
